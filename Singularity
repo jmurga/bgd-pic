@@ -1,5 +1,6 @@
 BootStrap: docker
-From: continuumio/miniconda3:latest
+#From: continuumio/miniconda3:latest
+From: debian
 
 %labels
 MAINTAINER Jesus Murga Moreno
@@ -16,8 +17,8 @@ MAINTAINER Jesus Murga Moreno
 	export JULIA_DEPOT_PATH=:/opt/.julia
 	
 %post
-
-    export JULIA_DEPOT_PATH=/opt/.julia
+	
+	export JULIA_DEPOT_PATH=/opt/.julia
 
 	apt-get update && apt-get install -y --no-install-recommends apt-utils
 	apt-get install -y libglib2.0-0 libxext6 wget bzip2 ca-certificates curl git vim make build-essential libgsl-dev libz-dev gzip bcftools samtools vcftools
