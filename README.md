@@ -1,2 +1,0 @@
-# bgd-pic
-# bgd-pic
