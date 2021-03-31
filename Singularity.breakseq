@@ -9,7 +9,6 @@ MAINTAINER Jesus Murga Moreno
 	export LC_ALL=C.UTF-8
 	export LANG=C.UTF-8
 	export PATH=/opt/conda/bin:$PATH
-
 	export PATH=/breakseq-1.3/:$PATH
 	
 %post
