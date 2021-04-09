@@ -20,20 +20,20 @@ MAINTAINER Jesus Murga Moreno
 
 	export PATH=/opt/conda/bin:$PATH
 
-	conda install -c bioconda plink bowtie -y
+	conda install -c bioconda plink bowtie2 -y
 
-	wget http://sv.gersteinlab.org/breakseq/download/breakseq-1.3.tgz
-	tar -zxf breakseq-1.3.tgz
+	wget wget https://raw.githubusercontent.com/RuthGG/Breakseq_jonversion/main/breakseq-1.3_jon.tar.gz
+	tar -xzf breakseq-1.3_jon.tar.gz
 	chown -R root:root breakseq-1.3/
 	chmod +x breakseq-1.3/breakseq
 	
-	echo '# The configuration file for BreakSeq\n\nPYTHON="/usr/bin/python2.7"\n\n#Genome_Seq_Directory="/home9-2/gersteinlab/common/genomes/human/reference/hg18/fasta"\n#RepeatMasked_Genome_Directory="/home9-2/gersteinlab/common/genomes/human/reference/hg18/RM"\n#BLAST_Directory="/home9-2/gersteinlab/common/programs/blast-2.2.17/bin"\n#RepeatMasker_Program_Directory="/home9-2/gersteinlab/common/programs/repeatmasker-3.2.7"\n\n#Blat_Server={"panTro2":"c022", "rheMac2":"c024", "ponAbe2":"c025"}\n#Blat_Client="/home9-2/gersteinlab/common/programs/blat-3.4/gfClient"\n#Blat_TwoBit={"panTro2":"/home9-2/gersteinlab/common/genomes/chimp/panTro2/2bit", "rheMac2":"/home9-2/gersteinlab/common/genomes/macaque/rheMac2/2bit", #"ponAbe2":"/home9-2/gersteinlab/common/genomes/orangutan/ponAbe2/2bit"}\n#Net_Chain={"panTro2":"/home9-2/gersteinlab/common/genomes/chimp/panTro2/chain/hg18.panTro2.syn.net.level1", "rheMac2":"/home9-2/gersteinlab/common/genomes/#macaque/rheMac2/chain/hg18.rheMac2.syn.net.level1", "ponAbe2":"/home9-2/gersteinlab/common/genomes/orangutan/ponAbe2/chain/hg18.ponAbe2.syn.net.level1"}\n\n#Gencode_GFF="/home9-2/gersteinlab/common/genomes/human/reference/hg18/gtf/gencode.v3b.annotation.NCBI36.gene.gtf"\n\n# Currently, for SV Mappers config, see its own README\nSam_Tools_Path="/usr/bin"\nBowtie_Path="/opt/conda/bin/bowtie2"\nBowtie_Indexes="/nfs/pic.es/user/r/rgomez/20210325_breakseq/data/use/bowtie_index"' > /breakseq-1.3/bin/Config.txt
+	echo '# The configuration file for BreakSeq\n\nPYTHON="/usr/bin/python2.7"\n\n#Genome_Seq_Directory="/home9-2/gersteinlab/common/genomes/human/reference/hg18/fasta"\n#RepeatMasked_Genome_Directory="/home9-2/gersteinlab/common/genomes/human/reference/hg18/RM"\n#BLAST_Directory="/home9-2/gersteinlab/common/programs/blast-2.2.17/bin"\n#RepeatMasker_Program_Directory="/home9-2/gersteinlab/common/programs/repeatmasker-3.2.7"\n\n#Blat_Server={"panTro2":"c022", "rheMac2":"c024", "ponAbe2":"c025"}\n#Blat_Client="/home9-2/gersteinlab/common/programs/blat-3.4/gfClient"\n#Blat_TwoBit={"panTro2":"/home9-2/gersteinlab/common/genomes/chimp/panTro2/2bit", "rheMac2":"/home9-2/gersteinlab/common/genomes/macaque/rheMac2/2bit", #"ponAbe2":"/home9-2/gersteinlab/common/genomes/orangutan/ponAbe2/2bit"}\n#Net_Chain={"panTro2":"/home9-2/gersteinlab/common/genomes/chimp/panTro2/chain/hg18.panTro2.syn.net.level1", "rheMac2":"/home9-2/gersteinlab/common/genomes/#macaque/rheMac2/chain/hg18.rheMac2.syn.net.level1", "ponAbe2":"/home9-2/gersteinlab/common/genomes/orangutan/ponAbe2/chain/hg18.ponAbe2.syn.net.level1"}\n\n#Gencode_GFF="/home9-2/gersteinlab/common/genomes/human/reference/hg18/gtf/gencode.v3b.annotation.NCBI36.gene.gtf"\n\n# Currently, for SV Mappers config, see its own README\nSam_Tools_Path="/usr/bin"\nBowtie_Path="/opt/conda/bin/"\nBowtie_Indexes="/nfs/pic.es/user/r/rgomez/20210325_breakseq/data/use/bowtie_index"' > /breakseq-1.3/bin/Config.txt
 	
 	sed -i 's/export MIN_COVER=10/export MIN_COVER=30/' /breakseq-1.3/bin/svMap/svMap.sh 
 	sed -i 's/export LIB_LEN=60/export LIB_LEN=300/' /breakseq-1.3/bin/svMap/svMap.sh 
 
-	sed -i 's/SAMTOOLS_PATH=\~\/programs\/samtools-0.1.6_x86_64-linux/SAMTOOLS_PATH=\/usr\/bin/' /breakseq-1.3/bin/svMap/align.bow
-	sed -i 's/BOWTIE_PATH=\~\/programs\/bowtie-0.11.3/BOWTIE_PATH=\/opt\/conda\/bin/' /breakseq-1.3/bin/svMap/align.bow
-	sed -i 's/BOWTIE_INDEXES=\~\/data\/bowtie/BOWTIE_INDEXES=\/nfs\/pic\.es\/user\/r\/rgomez\/20210325_breakseq\/data\/use\/bowtie_index/' /breakseq-1.3/bin/svMap/align.bow
+	sed -i 's/\/usr\/local\/bin\/samtools/\/usr\/bin\/samtools/'  /breakseq-1.3/bin/svMap/align.bow2
+	sed -i 's/BOWTIE2_PATH=\/home\/jon\/soft\/bowtie2/BOWTIE2_PATH=\/opt\/conda\/bin/' /breakseq-1.3/bin/svMap/align.bow2
+	sed -i 's/BOWTIE2_INDEXES=\/home\/jon\/soft\/bowtie2\/indexes/BOWTIE2_INDEXES=\/nfs\/pic\.es\/user\/r\/rgomez\/20210325_breakseq\/data\/use\/bowtie_index/' /breakseq-1.3/bin/svMap/align.bow2
 	
 	
