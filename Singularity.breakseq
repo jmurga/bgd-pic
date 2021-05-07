@@ -20,7 +20,8 @@ MAINTAINER Jesus Murga Moreno
 
 	export PATH=/opt/conda/bin:$PATH
 
-	conda install -c bioconda plink bowtie2 r/label/archive r -y
+	conda install -c bioconda plink bowtie2 -y
+	conda install -c r r -y
 
 	wget https://raw.githubusercontent.com/RuthGG/Breakseq_jonversion/main/breakseq-1.3_jon.tar.gz
 	tar -xzf breakseq-1.3_jon.tar.gz
