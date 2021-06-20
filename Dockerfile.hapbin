@@ -1,0 +1,11 @@
+FROM ubuntu:14.04
+
+RUN apt-get update\
+    && apt-get install -y libglib2.0-0 libxext6 wget bzip2 ca-certificates curl git vim make build-essential libz-dev gzip parallel git cmake libcr-dev mpich libmpich-dev less && \
+    apt-get clean  && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/evotools/hapbin.git
+RUN  cd hapbin/build/ && cmake ../src/ &&  make
+
+ENV PATH /hapbin/build/:$PATH
